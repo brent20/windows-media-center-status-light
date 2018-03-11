@@ -14,12 +14,12 @@
 
 while($true) {
 	# WMC is open locally or on an extender
-    $wmcshell = Get-Process ehshell -ErrorAction SilentlyContinue
+        #  $wmcshell = Get-Process ehshell -ErrorAction SilentlyContinue
 	
 	# WMC is recording a show
     $wmcrec = Get-Process ehrec -ErrorAction SilentlyContinue
 	
-    if ( $wmcshell -or $wmcrec) {
+    if ( $wmcrec) {
         # Recording a show, tell Home Assistant
 
         Write-Host "ehshell.exe or ehrec.exe found, telling Home Assistant that WMC is recording"
@@ -32,6 +32,6 @@ while($true) {
 		Invoke-RestMethod -URI "http://IP_ADDRESS:8123/api/states/binary_sensor.WMCRecording"
     }
     
-    # Sleep for 5 seconds, then check again
-    Start-Sleep -s 5
+    # Sleep for 30 seconds, then check again
+    Start-Sleep -s 30
 }
